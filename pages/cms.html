@@ -1,0 +1,44 @@
+{# change CMS assets base URL from 'http://cms.webhook.com/{{ cmsVersion }}/assets' to local copy to support serving over HTTPS #}
+{% set cmsAssetsBase = '/static/cms/v2/assets' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Webhook</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="siteName" content="dmc-site">
+  <meta name="buildLive" content="true">
+  {% if cmsSocketPort %}
+  <meta name="socketPort" content="{{ cmsSocketPort }}">
+  {% endif %}
+
+  <link rel="stylesheet" href="{{ cmsAssetsBase }}/app.min.css">
+
+  <link rel="shortcut icon" href="/static/images/favicon.png">
+  <link rel="apple-touch-icon icon-precomposed" href="/static/images/touch-icon.png"/>
+
+  {% if firebase_conf.custom %}
+  <script>
+   window.ENV = {
+      dbName:     "{{ firebase_conf.firebase }}",
+      uploadUrl:  "{{ firebase_conf.server }}",
+      embedlyKey: "{{ firebase_conf.embedly }}",
+      selfHosted: true
+    };
+  </script>
+  {% endif %}
+
+  <script src="{{ cmsAssetsBase }}/js/config.min.js"></script>
+  <script src="{{ cmsAssetsBase }}/vendor.min.js"></script>
+  <script src="{{ cmsAssetsBase }}/js/app.min.js"></script>
+
+</head>
+<body>
+  <script>
+    window.App = require('appkit/app')["default"].create();
+  </script>
+</body>
+</html>
