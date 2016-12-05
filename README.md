@@ -3,7 +3,7 @@
 By default Webhook CMS files are only available over a non-secure HTTP connection from `http://cms.webhook.com/`. By bundling these CMS files with your own website, you can serve them over a secure HTTPS connection.
 
 
-## Secure you website
+## Secure your website
 
 ### The problem
 
